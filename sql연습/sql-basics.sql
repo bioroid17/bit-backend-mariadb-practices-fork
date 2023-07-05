@@ -61,4 +61,48 @@ select name, species
 select name, species, birth
   from pet
  where birth >= '1998-01-01'; 
+
+select name, species, gender
+  from pet
+ where species='dog'
+   and gender='f';
+
+select name, species
+  from pet
+ where species='snake'
+    or species='bird';
+
+  select name, birth
+    from pet
+order by birth asc;
+
+  select name, birth
+    from pet
+order by birth desc;
+
+select name, birth, death
+  from pet
+ where death is not null;
  
+select name
+  from pet
+ where name like 'b%'; 
+
+select name
+  from pet
+ where name like '%fy'; 
+ 
+select name
+  from pet
+ where name like '%w%'; 
+ 
+select name
+  from pet
+ where name like '______'; 
+ 
+select name
+  from pet
+ where name like 'b_____'; 
+ 
+select count(*)
+  from pet; 
