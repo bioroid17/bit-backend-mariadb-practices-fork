@@ -37,8 +37,28 @@ select *
   from pet;
 
 -- update: DML(U)
-update pet
-   set name='sungtanee'
- where name='성탄이';
+UPDATE pet
+   SET name = 'sungtanee'
+ WHERE name = '성탄이';
 
+-- delete: DML(D)
+delete
+  from pet
+ where name = 'sungtanee';
+ 
+-- load data
+load data local infile 'c:\\pet.txt' into table pet;
+
+update pet 
+   set death = null
+ where name != 'bowser';
+ 
+-- select 연습
+select name, species
+  from pet
+ where name = 'Bowser';
+
+select name, species, birth
+  from pet
+ where birth >= '1998-01-01'; 
  
