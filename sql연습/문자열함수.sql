@@ -23,4 +23,20 @@ select lpad('1234', 10, '-'), rpad('1234', 10, '-');
 
 -- 예제2: 직원들의 월급을 오른쪽 정렬(빈공간 *)
 select lpad(salary, 10, '*')
-  from salaries; 
+  from salaries;
+
+-- trim, ltrim, rtrim
+select concat('---', ltrim('    hello    '), '---'),
+       concat('---', rtrim('    hello    '), '---'),
+       concat('---', trim('    hello    '), '---'),
+       concat('---', trim(leading 'x' from 'xxxxxxhelloxxxxx'), '---'),
+       concat('---', trim(trailing 'x' from 'xxxxxxhelloxxxxx'), '---'),
+       concat('---', trim(both 'x' from 'xxxxxxhelloxxxxx'), '---')
+  from dual;
+
+-- length
+select length('Hello World') from dual;
+  
+  
+  
+  
