@@ -42,3 +42,45 @@ select count(*)
    and b.to_date = '9999-01-01';
 
 -- join ~ on
+-- 예제) 현재, 직책별 평균 연봉을 큰 순서대로 출력하세요.
+  select b.title, avg(a.salary)
+    from salaries a
+    join titles b on a.emp_no = b.emp_no
+   where a.to_date = '9999-01-01'
+     and b.to_date = '9999-01-01'
+group by b.title
+order by avg(a.salary) desc;   
+  
+-- 실습문제1
+-- 현재, 직원들의 근무 부서를 출력해 보세요.
+-- 사번, 직원이름, 부서명 순으로 출력하세요.
+select a.emp_no, a.first_name, b.dept_name
+  from employees a, departments b, dept_emp c
+ where a.emp_no = c.emp_no
+   and b.dept_no = c.dept_no
+   and c.to_date = '9999-01-01';
+
+-- 실습문제2
+-- 현재, 직책별 평균 연봉과 직원수를 구하되 직원수가 100명 이상인 직책만 출력 하세요.
+  select b.title, avg(salary), count(*)
+    from salaries a, titles b
+   where a.emp_no = b.emp_no
+     and a.to_date = '9999-01-01'
+     and b.to_date = '9999-01-01'
+group by b.title
+  having count(*) >= 100;   
+
+-- 실습문제3
+-- 현재, 부서별로 직책이 Engineer인 직원들에 대해서만 평균 급여를 구하세요.
+-- 부서이름, 평균급여 순으로 출력 평균 급여가 높은 순으로 출력
+select a.dept_name, avg(d.salary)
+  from departments a, dept_emp b, titles c, salaries d
+ where a.dept_no = b.dept_no
+   and b.emp_no = c.emp_no
+   and c.emp_no = d.emp_no
+   and b.to_date = '9999-01-01'
+   and c.to_date = '9999-01-01'
+   and d.to_date = '9999-01-01'
+   and c.title = 'Engineer'
+group by a.dept_name
+order by avg(d.salary) desc;   
