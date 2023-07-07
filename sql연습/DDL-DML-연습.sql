@@ -51,6 +51,15 @@ delete
   from member
  where no=2;
  
+-- transaction
+select @@autocommit;
+set autocommit=0;
+
+insert
+  into member(name, password, dept, email)
+values ('안대혁3',  password('1234'), '개발팀', 'kickscar3@gmail.com');  
+
+commit; 
 
 -- select
 select * from member;
