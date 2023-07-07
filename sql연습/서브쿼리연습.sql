@@ -149,12 +149,51 @@ order by b.salary asc;
                                      and salary > 50000)
 order by b.salary asc;   
 
--- 실습문제4: 현재, 각 부서별로 최고 연봉을 받고 있는 부서이름, 직원이름, 최고연봉을 출력하세요. 
+-- 실습문제4:
+-- 현재, 각 부서별로 최고 연봉을 받고 있는 부서이름, 직원이름, 최고연봉을 출력하세요. 
 -- 총무 둘리 1000
 -- 영업 또치 2000
 
+  select a.dept_no, max(b.salary)
+    from dept_emp a, salaries b
+   where a.emp_no = b.emp_no
+     and a.to_date = '9999-01-01'
+     and b.to_date = '9999-01-01'
+group by a.dept_no;
+   
 -- sol1: where절 subquery & in
+select c.dept_name, a.first_name, d.salary 
+  from employees a, dept_emp b, departments c, salaries d
+ where a.emp_no = b.emp_no
+   and b.dept_no =c.dept_no
+   and a.emp_no = d.emp_no
+   and b.to_date = '9999-01-01'
+   and d.to_date = '9999-01-01'
+   and (b.dept_no, d.salary) in (  select a.dept_no, max(b.salary)
+                                     from dept_emp a, salaries b
+                                    where a.emp_no = b.emp_no
+                                      and a.to_date = '9999-01-01'
+                                      and b.to_date = '9999-01-01'
+                                 group by a.dept_no)
+order by d.salary desc;                                 
 
 -- sol2: from절 subquery & join
-
-   
+select c.dept_name, a.first_name, d.salary 
+  from employees a,
+       dept_emp b,
+       departments c,
+       salaries d,
+	   (  select a.dept_no, max(b.salary) as max_salary
+            from dept_emp a, salaries b
+           where a.emp_no = b.emp_no
+             and a.to_date = '9999-01-01'
+             and b.to_date = '9999-01-01'
+		group by a.dept_no) e
+ where a.emp_no = b.emp_no
+   and b.dept_no =c.dept_no
+   and a.emp_no = d.emp_no
+   and b.dept_no = e.dept_no
+   and b.to_date = '9999-01-01'
+   and d.to_date = '9999-01-01'
+   and d.salary = e.max_salary
+order by d.salary desc;    
