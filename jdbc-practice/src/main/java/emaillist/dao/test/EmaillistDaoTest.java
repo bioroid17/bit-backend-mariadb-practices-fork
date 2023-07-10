@@ -8,14 +8,14 @@ import emaillist.vo.EmaillistVo;
 public class EmaillistDaoTest {
 
 	public static void main(String[] args) {
+		// Mock 객체 
 		EmaillistVo vo = new EmaillistVo();
 		vo.setFirstName("안");
 		vo.setLastName("대혁");
 		vo.setEmail("kickscar@gmail.com");
-		testInsert(vo);
-
-		testDelete("kickscar@gmail.com");
 		
+		testInsert(vo);
+		testDelete("kickscar@gmail.com");
 		testFindAll();
 	}
 
