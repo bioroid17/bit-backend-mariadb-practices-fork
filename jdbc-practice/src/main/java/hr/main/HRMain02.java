@@ -17,7 +17,7 @@ public class HRMain02 {
 			
 		List<EmployeeVo> list = new EmployeeDao().findBySalary(minSalary, maxSalary);
 		for(EmployeeVo vo : list) {
-			System.out.println(vo.getNo() + ":" + vo.getFirstName() + ":" + vo.getLastName() + ":" + vo.getHireDate());
+			System.out.println(vo.getNo() + ":" + vo.getFirstName() + ":" + vo.getSalary());
 		}
 		
 		scanner.close();
