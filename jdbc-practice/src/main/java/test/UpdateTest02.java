@@ -3,19 +3,19 @@ package test;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SelectTest02 {
+public class UpdateTest02 {
 
 	public static void main(String[] args) {
-		list();
+		update(3L, "솔루션개발");
 	}
 
-	public static void list() {
+	public static boolean update(Long deptNo, String deptName) {
+		boolean result = false;
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		
 		try {
 			//1. JDBC Driver Class 로딩
@@ -27,24 +27,20 @@ public class SelectTest02 {
 			
 			//3. Statement 준비
 			String sql = 
-					"   select no, name" + 
-					"     from dept" +
-					" order by no desc";
+					"update dept" + 
+				    "   set name = ?" +
+					" where no = ?";			
 			pstmt = conn.prepareStatement(sql);
-
+			
 			//4. Binding
+			pstmt.setString(1, deptName);
+			pstmt.setLong(2, deptNo);
 			
 			//5. SQL 실행
-			rs = pstmt.executeQuery();
+			int count = pstmt.executeUpdate();
 			
-			//5. 결과 처리
-			while(rs.next()) {
-				Long no = rs.getLong(1);
-				String name = rs.getString(2);
-				
-				System.out.println(no + ":" + name);
-			}
-			
+			//6. 결과 처리
+			result = count == 1;
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패:" + e);
 		} catch (SQLException e) {
@@ -52,9 +48,6 @@ public class SelectTest02 {
 		} finally {
 			//6. 자원 정리
 			try {
-				if(rs != null) {
-					rs.close();
-				}
 				if(pstmt != null) {
 					pstmt.close();
 				}
@@ -65,5 +58,7 @@ public class SelectTest02 {
 				e.printStackTrace();
 			}
 		}
+		
+		return result;		
 	}
 }
