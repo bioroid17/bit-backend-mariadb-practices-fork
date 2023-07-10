@@ -11,11 +11,14 @@ public class HRMain02 {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		
-		System.out.print("salary[min max]>");
+		System.out.print("salary[min max]> ");
 		int minSalary = scanner.nextInt();
 		int maxSalary = scanner.nextInt();
-		
-		System.out.println(minSalary + ":" + maxSalary);
+			
+		List<EmployeeVo> list = new EmployeeDao().findBySalary(minSalary, maxSalary);
+		for(EmployeeVo vo : list) {
+			System.out.println(vo.getNo() + ":" + vo.getFirstName() + ":" + vo.getLastName() + ":" + vo.getHireDate());
+		}
 		
 		scanner.close();
 	}
