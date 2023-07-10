@@ -8,16 +8,22 @@ import emaillist.vo.EmaillistVo;
 public class EmaillistDaoTest {
 
 	public static void main(String[] args) {
-		testInsert();
-		testFindAll();
-	}
-
-	private static void testInsert() {
 		EmaillistVo vo = new EmaillistVo();
 		vo.setFirstName("안");
 		vo.setLastName("대혁");
 		vo.setEmail("kickscar@gmail.com");
+		testInsert(vo);
+
+		testDelete("kickscar@gmail.com");
 		
+		testFindAll();
+	}
+
+	private static void testDelete(String email) {
+		new EmaillistDao().deleteByEmail(email);
+	}
+
+	private static void testInsert(EmaillistVo ) {
 		new EmaillistDao().insert(vo);
 	}
 
