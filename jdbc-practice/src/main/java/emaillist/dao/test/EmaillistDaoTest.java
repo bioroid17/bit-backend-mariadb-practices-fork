@@ -23,7 +23,7 @@ public class EmaillistDaoTest {
 		new EmaillistDao().deleteByEmail(email);
 	}
 
-	private static void testInsert(EmaillistVo ) {
+	private static void testInsert(EmaillistVo vo) {
 		new EmaillistDao().insert(vo);
 	}
 
