@@ -9,7 +9,7 @@ public class EmployeeDaoTest {
 
 	public static void main(String[] args) {
 		// testFindByName("mahe");
-		testFindBySalary(100000, 200000);
+		testFindBySalary(150000, 155000);
 	}
 
 	private static void testFindBySalary(int min, int max) {
