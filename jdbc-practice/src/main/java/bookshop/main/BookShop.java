@@ -17,7 +17,7 @@ public class BookShop {
 		scanner.close();
 
 		BookVo vo = new BookVo();
-		vo.setNo(null);
+		vo.setNo((long)num);
 		vo.setRent("y");
 		new BookDao().updateRent(vo);
 		
