@@ -20,7 +20,7 @@ public class BookDao {
 		try {
 			conn = getConnection();
 			
-			String sql = "insert into book(no, title, author_no) values(null, ?, ?)";
+			String sql = "insert into book(title, author_no) values(?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, vo.getTitle());
@@ -99,7 +99,7 @@ public class BookDao {
 		return result;
 	}
 
-	public void update(BookVo vo) {
+	public void updateRent(BookVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -137,7 +137,7 @@ public class BookDao {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 
-			String url = "jdbc:mariadb://192.168.10.125:3307/webdb?charset=utf8";
+			String url = "jdbc:mariadb://192.168.0.155:3306/webdb?charset=utf8";
 			conn = DriverManager.getConnection(url, "webdb", "webdb");
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패:" + e);

@@ -18,8 +18,8 @@ public class BookShop {
 		
 		BookVo vo = new BookVo();
 		vo.setNo(no);
-		vo.setRent("Y");
-		new BookDao().update(vo);
+		vo.setRent("y");
+		new BookDao().updateRent(vo);
 		
 		displayBookInfo();
 	}
@@ -29,7 +29,7 @@ public class BookShop {
 		
 		List<BookVo> list = new BookDao().findAll();
 		for(BookVo vo : list) {
-			String info = String.format("[%d] 제목: %s, 작가: %s, 대여유무: %s", vo.getNo(), vo.getTitle(), vo.getAuthorName(), "Y".equals(vo.getRent()) ? "대여중" : "재고있음");
+			String info = String.format("[%d] 제목: %s, 작가: %s, 대여유무: %s", vo.getNo(), vo.getTitle(), vo.getAuthorName(), "y".equals(vo.getRent()) ? "대여중" : "재고있음");
 			System.out.println(info);
 		}
 	}
